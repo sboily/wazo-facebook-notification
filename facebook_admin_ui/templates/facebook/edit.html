@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+{% block content_header %}
+  {{ build_breadcrumb('Facebook Notification', '', 'facebook', ['Edit']) }}
+{% endblock %}
+
+{% block content %}
+  {% call build_section_row() %}
+    {% call build_form_box('Facebook', '', 'facebook') %}
+      {% call build_form(action=url_for('.FBView:put', id='no-id')) %}
+        {% call add_default_fields(form=form, submit_value="Update") %}
+          {{ render_field(form.page_access_token) }}
+          {% if resource.verify_token %}
+            <p>Please configure the facebook webhooks informations from <a href="https://developers.facebook.com/apps/">Facebook Developer's page.</a></p>
+            <p>
+            With this information:
+            <ul>
+              <li>Callback URL: https://<b>your_dns_server_with_valid_ssl_certificate</b>/api/webhookd/1.0/facebook/</li>
+              <li>Verify Token: {{ resource.verify_token }}</li>
+            </ul>
+            </p>
+          {% endif %}
+        {% endcall %}
+      {% endcall %}
+    {% endcall %}
+  {% endcall %}
+{% endblock %}

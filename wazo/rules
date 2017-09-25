@@ -1,0 +1,32 @@
+#!/bin/sh
+# Copyright 2017 The Wazo Authors  (see the AUTHORS file)
+# SPDX-License-Identifier: GPL-3.0+
+
+case "$1" in
+    build)
+        python setup.py bdist
+        ;;
+
+    package)
+        tar xvf dist/wazo_facebook_notifier-*.tar.gz -C ${pkgdir}
+        cp -R etc ${pkgdir}/
+        ;;
+
+    install)
+        chown wazo-admin-ui.wazo-admin-ui /etc/facebook/*
+        systemctl restart wazo-admin-ui
+        systemctl restart wazo-webhookd
+        ;;
+
+    uninstall)
+        rm -f /etc/wazo-admin-ui/conf.d/050-wazo-plugin-facebook-notifier.yml
+        rm -f /etc/wazo-webhookd/conf.d/050-wazo-plugin-facebook-notifier.yml
+        systemctl restart wazo-admin-ui
+        systemctl restart wazo-webhookd
+        ;;
+
+    *)
+        echo "$0 called with unknown argument '$1'" >&2
+        exit 1
+    ;;
+esac

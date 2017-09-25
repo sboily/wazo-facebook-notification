@@ -1,0 +1,9 @@
+name: admin-ui-webhook
+namespace: quintana
+version: 0.0.1
+author: Wazo Team
+display_name: Facebook Notifier
+tags:
+  - beta
+  - application
+homepage: https://github.com/sboily/wazo-facebook-notifier
