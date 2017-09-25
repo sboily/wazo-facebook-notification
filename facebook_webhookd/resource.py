@@ -50,7 +50,7 @@ class FBResource(Resource):
     def post(self):
         payload = request.get_json(force=True)
         if payload.get('entry'):
-            if 'messaging' in payload['entry']:
+            if payload['entry'][0].get('messaging'):
                 self.messenger.handle(payload)
         return ''
 
