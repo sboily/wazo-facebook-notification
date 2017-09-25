@@ -48,7 +48,11 @@ class FBResource(Resource):
         return {'error': 'VERIFY_TOKEN does not match'}, 401
 
     def post(self):
-        self.messenger.handle(request.get_json(force=True))
+        payload = request.get_json(force=True)
+        if payload.get('entry'):
+            if 'messaging' in payload['entry']:
+                self.messenger.handle(payload)
+        return ''
 
     def _load_config(self):
         with open(configfile) as json_data:
