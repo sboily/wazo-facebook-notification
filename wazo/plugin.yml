@@ -1,8 +1,10 @@
-name: admin-ui-webhook
+name: facebook-notification
 namespace: quintana
 version: 0.0.1
 author: Wazo Team
 display_name: Facebook Notifier
+plugin_format_version: 1
+min_wazo_version: 17.14
 tags:
   - beta
   - application
