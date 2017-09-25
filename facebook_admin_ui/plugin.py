@@ -36,7 +36,11 @@ class Plugin(object):
 
 
 class FBForm(BaseForm):
-    page_access_token = StringField('Page Access Token', [InputRequired(), Length(max=256)])
+    page_access_token = StringField('Page Access Token', [
+                                       InputRequired(),
+                                       Length(max=256)],
+                                       render_kw={'type': 'password',
+                                           'data_toggle': 'page_access_token'})
     submit = SubmitField('Submit')
 
 
