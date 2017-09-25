@@ -43,7 +43,6 @@ class FBResource(Resource):
         self.messenger = Messenger(self._get_page_access_token())
 
     def get(self):
-        print(self._get_verify_token())
         if (request.args.get('hub.verify_token') == self._get_verify_token()):
             return make_response(request.args.get('hub.challenge'))
         return {'error': 'VERIFY_TOKEN does not match'}, 401
@@ -51,14 +50,12 @@ class FBResource(Resource):
     def post(self):
         self.messenger.handle(request.get_json(force=True))
 
-    def _get_verify_token(self):
+    def _load_config(self):
         with open(configfile) as json_data:
-            config = json.load(json_data)
+            return json.load(json_data)
 
-        return config['verify_token']
+    def _get_verify_token(self):
+        return self._load_config()['verify_token']
 
     def _get_page_access_token(self):
-        with open(configfile) as json_data:
-            config = json.load(json_data)
-
-        return config['page_acces_token']
+        return self._load_config()['page_access_token']
