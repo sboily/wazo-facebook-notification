@@ -4,13 +4,13 @@
 
 case "$1" in
     build)
-        python setup.py bdist -d python2
-        python3 setup.py bdist -d python3
+        python setup.py bdist -d dist/python2
+        python3 setup.py bdist -d dist/python3
         ;;
 
     package)
-        tar xvf python2/wazo_facebook_notifier-*.tar.gz -C ${pkgdir}
-        tar xvf python3/wazo_facebook_notifier-*.tar.gz -C ${pkgdir}
+        tar xvf dist/python2/wazo_facebook_notifier-*.tar.gz -C ${pkgdir}
+        tar xvf dist/python3/wazo_facebook_notifier-*.tar.gz -C ${pkgdir}
         cp -R etc ${pkgdir}/
         ;;
 
