@@ -8,7 +8,7 @@ case "$1" in
         ;;
 
     package)
-        tar xvf wazo_facebook_notifier-*.tar.gz -C ${pkgdir}
+        tar xvf dist/wazo_facebook_notifier-*.tar.gz -C ${pkgdir}
         cp -R etc ${pkgdir}/
         ;;
 
