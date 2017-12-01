@@ -7,7 +7,7 @@ import json
 import requests
 import uuid
 
-from urlparse import urlparse
+from urllib.parse import urlparse
 
 from flask_menu.classy import register_flaskview
 from flask_menu.classy import classy_menu_item
