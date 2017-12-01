@@ -4,13 +4,11 @@
 
 case "$1" in
     build)
-        python setup.py bdist -d dist/python2
-        python3 setup.py bdist -d dist/python3
+        python3 setup.py bdist
         ;;
 
     package)
-        tar xvf dist/python2/wazo_facebook_notifier-*.tar.gz -C ${pkgdir}
-        tar xvf dist/python3/wazo_facebook_notifier-*.tar.gz -C ${pkgdir}
+        tar xvf wazo_facebook_notifier-*.tar.gz -C ${pkgdir}
         cp -R etc ${pkgdir}/
         ;;
 
@@ -21,8 +19,6 @@ case "$1" in
         ;;
 
     uninstall)
-        rm -f /etc/wazo-admin-ui/conf.d/050-wazo-plugin-facebook-notifier.yml
-        rm -f /etc/wazo-webhookd/conf.d/050-wazo-plugin-facebook-notifier.yml
         systemctl restart wazo-admin-ui
         systemctl restart wazo-webhookd
         ;;
